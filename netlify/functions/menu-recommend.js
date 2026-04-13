@@ -49,7 +49,7 @@ export async function handler(event) {
         "Authorization": `Bearer ${OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
-        model: "openrouter/auto",
+        model: "openrouter/free"
         temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [
