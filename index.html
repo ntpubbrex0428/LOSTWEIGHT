@@ -1,0 +1,1505 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lost Weight</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f7fb;margin:0;color:#0f172a;padding-bottom:84px}
+.page{display:none;padding:16px;max-width:980px;margin:0 auto}.page.active{display:block}
+.card{background:#fff;border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.05);overflow:hidden}
+h1,h2,h3{margin:0 0 12px;word-break:break-word}.sub,.small{color:#64748b;font-size:14px;word-break:break-word}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid2>*,.grid4>*{min-width:0}
+input,select,button,textarea{width:100%;box-sizing:border-box;border-radius:14px;font-size:18px;max-width:100%}
+input,select,textarea{padding:14px;border:1px solid #dbe3ee;background:#fff}
+textarea{min-height:110px;resize:vertical}
+button{padding:15px;border:none;font-weight:800;cursor:pointer}
+.btn{background:#3167e3;color:#fff}.btn2{background:#e9f0ff;color:#2347b8}.btn3{background:#e8f7ef;color:#166534}.btn4{background:#fbeaea;color:#b91c1c}.btn5{background:#eef2ff;color:#0f172a}
+.stat{border:1px solid #dbe3ee;border-radius:16px;padding:12px}.stat .k{color:#64748b;font-size:14px}.stat .v{font-weight:900;font-size:24px;margin-top:6px}
+.check{display:flex;align-items:center;gap:10px;padding:14px;border:1px solid #dbe3ee;border-radius:14px;margin:10px 0}.check input{width:24px;height:24px}
+.pill,.tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#eef2ff;color:#2743a6;font-size:13px;font-weight:800}
+.photo-item,.leader,.menu-item,.chat-msg{border:1px solid #dbe3ee;border-radius:14px;padding:12px;margin:10px 0;overflow-wrap:anywhere}
+.photo-item img{max-width:100%;width:min(100%,220px);border-radius:12px;display:block;margin-top:8px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px} th,td{padding:10px 8px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:15px;vertical-align:top}
+canvas{width:100%;max-width:100%;border:1px solid #dbe3ee;border-radius:14px;background:#fff}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dbe3ee;display:flex;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.nav button{flex:1;background:#fff;color:#0f172a;border-radius:0;padding:12px;font-size:14px}
+.top-actions{display:flex;gap:10px;flex-wrap:wrap}.top-actions button{width:auto;min-width:120px}.small-top-btn{padding:10px 14px;font-size:14px;border-radius:12px;font-weight:800}
+.group-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.chat-box{max-height:380px;overflow:auto;padding-right:4px}
+.chat-input-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}
+.chat-input-row button{width:140px}
+#chatStatus{margin-top:8px}
+.bmi-under{color:#2563eb}.bmi-normal{color:#16a34a}.bmi-over{color:#ea580c}.bmi-obese{color:#dc2626}.danger-text{color:#dc2626}
+.photo-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.friend-card{border:1px solid #dbe3ee;border-radius:14px;padding:12px;margin:10px 0}.friend-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.photo-wall-person{border:1px solid #dbe3ee;border-radius:18px;padding:12px;margin:12px 0;background:#fff}.wall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.wall-cover{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;display:block;background:#f8fafc}.slot-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.slot-btn-active{outline:2px solid #3167e3}.chat-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.request-card{border:1px dashed #cbd5e1;border-radius:14px;padding:12px;margin:10px 0;background:#fafcff}.chat-fab-unread{animation:pulseUnread 1.4s ease-in-out infinite}@keyframes pulseUnread{0%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.72}100%{transform:scale(1);opacity:1}}
+.photo-wall-header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.photo-slider{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.photo-slide{min-width:220px;max-width:220px;scroll-snap-align:start;border:1px solid #dbe3ee;border-radius:14px;padding:10px;background:#fff}
+.photo-slide img{width:100%;border-radius:12px;display:block;aspect-ratio:3/4;object-fit:cover}
+.photo-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:3/4;border-radius:12px;background:#f8fafc;color:#94a3b8;text-align:center;padding:12px}
+.chat-fab{position:fixed;right:16px;bottom:92px;z-index:30;background:#3167e3;color:#fff;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.18);width:auto;padding:14px 16px}
+.chat-widget{position:fixed;right:16px;bottom:148px;width:min(360px,calc(100vw - 24px));max-height:70vh;z-index:31;background:#fff;border:1px solid #dbe3ee;border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.18);display:none;overflow:hidden}
+.chat-widget.open{display:block}
+.chat-widget-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #e5e7eb;background:#f8fbff;font-weight:800}
+.chat-widget-body{padding:12px}
+.ai-box{border:1px dashed #cbd5e1;border-radius:16px;padding:12px;margin-top:14px;background:#f8fafc}
+.ai-result{margin-top:10px;border:1px solid #dbe3ee;border-radius:14px;padding:12px;background:#fff}
+.entry-row{display:grid;grid-template-columns:1.2fr .7fr auto auto;gap:8px;align-items:center;margin:8px 0}.entry-list{margin-top:10px}.entry-total{margin-top:8px;font-weight:800}.mini-btn{padding:14px 12px}.switch-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.switch-row input{width:22px;height:22px}.muted{color:#64748b}.hint-red{color:#b91c1c}
+@media (max-width:760px){ .grid2,.grid4,.group-meta,.chat-input-row,.entry-row{grid-template-columns:1fr} .page{padding:12px} .card{padding:14px} .top-actions button,.chat-input-row button{width:100%} table{min-width:520px} .chat-widget{right:12px;bottom:132px;width:calc(100vw - 24px)} .chat-fab{right:12px;bottom:86px} }
+</style>
+</head>
+<body>
+
+<div class="page active" id="page-login">
+  <div class="card">
+    <h2 id="loginTitle">👤 註冊 / 登入</h2>
+    <div id="nicknameWrap" style="display:none">
+      <input id="nicknameInput" placeholder="輸入新暱稱">
+      <button class="btn2" id="saveNickBtn">儲存暱稱</button>
+    </div>
+    <div id="authFieldsWrap">
+      <input id="emailInput" type="email" placeholder="Email 帳號">
+      <input id="passwordInput" type="password" placeholder="密碼" style="margin-top:10px">
+      <div class="grid2" style="margin-top:10px">
+        <button class="btn" id="loginBtn">登入帳號</button>
+        <button class="btn2" id="signupBtn">註冊帳號</button>
+      </div>
+      <button class="btn5" id="resetBtn" style="margin-top:10px">忘記密碼</button>
+    </div>
+    <div class="grid2" id="profileActionRow" style="display:none;margin-top:10px"><button class="btn4" id="logoutBtn" style="display:none">登出</button><button class="btn5" id="backBtn" style="display:none">返回首頁</button></div>
+    <div id="loginStatus" class="small">尚未登入</div>
+  </div>
+</div>
+
+<div class="page" id="page-home">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <div>
+        <h1>減重計畫完整版</h1>
+        <div class="sub" id="helloText">Hi 訪客</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end"><div class="tag" id="helloTag">Hi 訪客</div><button class="btn2 small-top-btn" id="editProfileBtn" style="width:auto">修改暱稱</button></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>基本設定</h2>
+    <div class="grid2">
+      <div><div class="sub">身高 (cm)</div><input id="height" type="number" value="177"></div>
+      <div><div class="sub">目前體重 (kg)</div><input id="currentWeight" type="number" value="107"></div>
+      <div><div class="sub">目標體重 (kg)</div><input id="targetWeight" type="number" value="75"></div>
+      <div><div class="sub">一天幾餐</div><select id="meals"><option value="1">1 餐</option><option value="2" selected>2 餐</option><option value="3">3 餐</option></select></div>
+      <div><div class="sub">每週活動量</div><select id="activity"><option value="low">低（少運動）</option><option value="mid" selected>中（每週 3-4 次）</option><option value="high">高（常運動）</option></select></div>
+      <div><div class="sub">目標速度</div><select id="speed"><option value="slow">慢一點</option><option value="mid" selected>中等</option><option value="fast">快一點</option></select></div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <button class="btn" id="updatePlanBtn">更新計畫</button>
+      <button class="btn2" id="redrawMenuBtn">重抽菜單</button>
+    </div>
+    <div class="sub" id="planAdvice">建議做法：按「更新計畫」會依照你的體重、BMI、活動量與目標產生建議。</div>
+  </div>
+
+  <div class="card">
+    <h2>🍱 外食菜單推薦</h2>
+    <div id="menuBox"></div>
+  </div>
+
+  <div class="card">
+    <div class="grid4">
+      <div class="stat"><div class="k">BMI</div><div class="v" id="bmiV">34.2</div><div class="small" id="bmiLabel">肥胖</div></div>
+      <div class="stat"><div class="k">每日建議熱量</div><div class="v" id="kcalV">2376 kcal</div></div>
+      <div class="stat"><div class="k">蛋白質目標</div><div class="v" id="proteinV">171g</div></div>
+      <div class="stat"><div class="k">預估時間</div><div class="v" id="monthV">17個月</div></div>
+    </div>
+  </div>
+
+  
+<div class="card">
+    <h2>今日紀錄</h2>
+    <div class="grid2">
+      <div><div class="sub">日期</div><input id="logDate" type="date"></div>
+      <div><div class="sub">今日體重 (kg)</div><input id="logWeight" type="number" value="107"></div>
+      <div><div class="sub">今日跑步分鐘</div><input id="runMin" type="number" value="0"></div>
+      <div><div class="sub">今日餐數（自動）</div><input id="todayMeals" type="number" value="0" readonly></div>
+    </div>
+
+    <h3 style="margin-top:16px">🍱 今日餐點</h3>
+    <div class="entry-row">
+      <input id="mealNameInput" placeholder="例如：雞腿便當 / 茶葉蛋 / 沙拉">
+      <input id="mealKcalInput" type="number" placeholder="熱量 kcal">
+      <button class="btn5 mini-btn" id="estimateMealBtn">估算熱量</button>
+      <button class="btn2" id="addMealBtn">新增餐點</button>
+    </div>
+    <div class="entry-list" id="mealList"></div>
+    <div class="entry-total">今日餐點總熱量：<span id="mealTotalV">0</span> kcal</div>
+
+    <h3 style="margin-top:16px">🥤 今日飲料</h3>
+    <div class="entry-row">
+      <input id="drinkName" placeholder="例如：無糖豆漿 / 珍珠奶茶 / 美式咖啡">
+      <input id="drinkKcal" type="number" placeholder="熱量 kcal">
+      <button class="btn5 mini-btn" id="estimateDrinkBtn">估算熱量</button>
+      <button class="btn2" id="addDrinkBtn">新增飲料</button>
+    </div>
+    <div class="entry-list" id="drinkList"></div>
+    <div class="entry-total">今日飲料總熱量：<span id="drinkV">0</span> kcal</div>
+
+    <div class="ai-box">
+      <div class="sub">食物辨識</div>
+      <input id="foodPhotoInput" type="file" accept="image/*">
+      <div class="grid2" style="margin-top:10px">
+        <button class="btn2" id="analyzeFoodBtn">辨識食物照片</button>
+        <button class="btn3" id="useFoodCaloriesBtn">加入餐點</button>
+      </div>
+      <div class="ai-result" id="foodAiResult">可上傳食物照片，辨識後一鍵加入今日餐點。</div>
+    </div>
+
+    <div class="grid2" style="margin-top:10px">
+      <div class="stat"><div class="k">跑步預估消耗</div><div class="v" id="burnV">0 kcal</div></div>
+      <div class="stat"><div class="k">今日總卡路里</div><div class="v" id="totalKcalV">0 kcal</div><div class="small" id="totalKcalHint">未超過每日建議熱量</div></div>
+      <div class="stat"><div class="k">今日狀態</div><div class="v" id="saveState">未儲存</div></div>
+    </div>
+
+    <h3 style="margin-top:16px">今日執行</h3>
+    <label class="check"><input id="c1" type="checkbox">蛋白質達標</label>
+    <label class="check"><input id="c2" type="checkbox">沒有含糖飲料</label>
+    <label class="check"><input id="c3" type="checkbox">走路 / 運動 40-60 分鐘</label>
+    <label class="check"><input id="c4" type="checkbox">沒有宵夜</label>
+
+    <div style="margin-top:10px">
+      <button class="btn3" id="saveTodayBtn">儲存紀錄</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📈 每週下降趨勢</h2>
+    <canvas id="trend" width="900" height="260"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>🗓️ 歷史紀錄中心</h2>
+    <div class="grid2">
+      <div><div class="sub">查看日期</div><input id="viewDate" type="date"></div>
+      <div class="sub" style="padding-top:36px">可回看當天體重、食物、飲料、總卡路里、跑步、打卡。</div>
+    </div>
+    <div id="dailyBox" class="stat" style="margin-top:10px">這一天沒有紀錄</div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>日期</th><th>體重</th><th>食物 kcal</th><th>飲料 kcal</th><th>總卡路里</th><th>跑步</th><th>打卡</th></tr></thead>
+      <tbody id="histTable"><tr><td colspan="7">尚無紀錄</td></tr></tbody>
+    </table></div>
+  </div>
+</div>
+
+<div class="page" id="page-photo">
+  <div class="card">
+    <h2>📷 體態照片對比</h2>
+    <div class="grid2">
+      <div><div class="sub">選擇日期</div><input id="photoDate" type="date"></div>
+      <div>
+        <div class="sub">照片權限</div>
+        <select id="photoPrivacy">
+          <option value="private">不公開（只有自己看）</option>
+          <option value="public">公開（社群可看）</option>
+        </select>
+      </div>
+    </div>
+    <div class="sub">加入照片</div>
+    <input id="photoInput" type="file" accept="image/*">
+    <div class="grid2">
+      <button class="btn2" id="savePhotoBtn">儲存照片</button>
+      <button class="btn3" id="copyPolicyBtn">複製目前照片權限</button>
+    </div>
+    <div id="photoPolicyText" class="sub">目前預設：不公開</div>
+    <div id="photoList">尚無照片</div>
+      </div>
+
+  <div class="card">
+    <h2>🔔 每日提醒</h2>
+    <div class="switch-row" style="margin-bottom:10px">
+      <label><input id="reminderEnabled" type="checkbox" checked> 開啟每日提醒</label>
+    </div>
+    <div class="grid2">
+      <div><div class="sub">提醒時間</div><input id="remindTime" type="time" value="08:00"></div>
+      <div><div class="sub">提醒文字</div><input id="remindText" value="量體重、記錄飲料、安排今天運動"></div>
+    </div>
+    <div class="grid2">
+      <button class="btn2" id="saveReminderBtn">儲存提醒設定</button>
+      <button class="btn3" id="copyReminderBtn">複製提醒文字</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-social">
+  <div class="card">
+    <h2>👨‍👩‍👧‍👦 好友 / 家人監督</h2>
+    <div class="sub">目前登入者：<span id="socialWho">未登入</span></div>
+    <div class="group-meta" style="margin-bottom:10px">
+      <div><span class="pill">個人邀請碼</span> <span id="myPersonalCode">尚未登入</span></div>
+      <div><span class="pill">目前群組邀請碼</span> <span id="myGroupCode">尚未加入群組</span></div>
+    </div>
+
+    <div class="slot-buttons">
+      <button class="btn5" id="slotBtn0">群組1</button>
+      <button class="btn5" id="slotBtn1">群組2</button>
+    </div>
+
+    <input id="groupName" placeholder="群組名稱，例如 家人減脂團">
+    <div class="grid2">
+      <button class="btn" id="createGroupBtn">建立目前群組</button>
+      <button class="btn4" id="leaveGroupBtn">退出目前群組</button>
+    </div>
+    <div class="group-meta">
+      <div><span class="pill">目前群組名稱</span> <span id="myGroupName">尚未加入群組</span></div>
+      <div><span class="pill">我的身份</span> <span id="myRoleText">尚未加入群組</span></div>
+    </div>
+    <input id="joinCode" placeholder="輸入群組邀請碼加入目前群組槽位">
+    <button class="btn2" id="joinGroupBtn">加入目前群組</button>
+    <button class="btn3" id="resyncPhotosBtn" style="margin-top:10px">重新同步私人照片到目前群組牆</button>
+  </div>
+
+  <div class="card">
+    <h2>🤝 私人好友</h2>
+    <input id="friendCodeInput" placeholder="輸入朋友的個人邀請碼">
+    <div class="grid2">
+      <button class="btn2" id="addFriendBtn">送出好友申請</button>
+      <button class="btn5" id="copyPersonalCodeBtn">複製個人邀請碼</button>
+    </div>
+    <div style="margin-top:12px">
+      <h3>好友申請</h3>
+      <div id="friendRequestList">目前沒有好友申請</div>
+    </div>
+    <div style="margin-top:12px">
+      <h3>好友清單</h3>
+      <div id="friendList">尚無好友</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🏆 群組排行榜</h2>
+    <div id="leaderboardBox">尚未加入群組</div>
+  </div>
+
+  <div class="card">
+    <h2>🖼️ 社群公開照片牆</h2>
+    <div id="publicPhotoWall">尚無公開照片</div>
+  </div>
+
+</div>
+
+<button class="chat-fab" id="chatFab">💬 聊天室</button>
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-widget-header">
+    <span id="chatTitle">群組聊天室</span>
+    <button class="btn5" id="closeChatBtn" style="width:auto;padding:8px 10px">關閉</button>
+  </div>
+  <div class="chat-widget-body">
+    <div class="chat-tabs">
+      <button class="btn5" id="chatTabGroup">群組聊天</button>
+      <button class="btn5" id="chatTabFriend">好友聊天</button>
+    </div>
+    <div id="friendChatPickerWrap" style="display:none;margin-bottom:10px">
+      <select id="friendChatSelect"><option value="">選擇好友聊天</option></select>
+    </div>
+    <div class="chat-box" id="cheerList">尚無訊息</div>
+    <div class="chat-input-row" style="margin-top:10px">
+      <textarea id="cheerMsg" placeholder="輸入訊息"></textarea>
+      <button class="btn3" id="sendCheerBtn">送出訊息</button>
+    </div>
+    <div class="small" id="chatStatus">尚未加入群組</div>
+  </div>
+</div>
+
+<div class="nav">
+  <button id="navHome">首頁</button>
+  <button id="navPhoto">照片</button>
+  <button id="navSocial">社群</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, browserLocalPersistence, setPersistence, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import { getDatabase, ref, get, set, update, push, remove, onValue, off } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDxlXH49702EDjz9MQ0hvyu7ThUhkysVFM",
+  authDomain: "lose-weight-3ae05.firebaseapp.com",
+  databaseURL: "https://lose-weight-3ae05-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  projectId: "lose-weight-3ae05",
+  storageBucket: "lose-weight-3ae05.firebasestorage.app",
+  messagingSenderId: "902388908827",
+  appId: "1:902388908827:web:9e782ac0a61107464449be"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+const menus = [
+  [{name:'超商版',items:['茶葉蛋 2 顆','無糖豆漿 1 瓶','雞胸肉 1 份','地瓜 1 條'],kcal:650},
+   {name:'便當版',items:['雞腿便當去皮','白飯半碗','青菜加量','滷豆腐'],kcal:750}],
+  [{name:'火鍋版',items:['牛肉或雞肉','菜盤多吃','冬粉半份','無糖茶'],kcal:700},
+   {name:'早餐店版',items:['鮪魚蛋吐司','無糖豆漿','茶葉蛋 1 顆'],kcal:600}],
+  [{name:'自助餐版',items:['兩份青菜','一份雞肉','一份蛋','飯半碗'],kcal:700},
+   {name:'麵店版',items:['乾麵小碗','燙青菜','滷蛋','豆干'],kcal:720}]
+];
+
+let currentUser = null;
+let currentProfile = null;
+let socialGroupRef = null;
+let friendsRef = null;
+let friendRequestsRef = null;
+let privateChatRef = null;
+let currentChatMode = 'group';
+let activeFriendUid = '';
+let cachedFriendsMap = {};
+let unreadGroupCount = 0;
+let unreadPrivateCount = 0;
+let groupLastSeenTime = 0;
+let privateLastSeenMap = {};
+window.__groupMembersCache = window.__groupMembersCache || {};
+let currentPage = 'page-login';
+let lastFoodAi = null;
+let mealEntries = [];
+let drinkEntries = [];
+let editingMealIndex = -1;
+let editingDrinkIndex = -1;
+let activeGroupIndex = 0;
+const FOOD_AI_ENDPOINT = '/.netlify/functions/food-analyze';
+const PLAN_AI_ENDPOINT = '/.netlify/functions/plan-advice';
+const TEXT_CALORIE_ENDPOINT = '/.netlify/functions/text-calorie';
+const MENU_AI_ENDPOINT = '/.netlify/functions/menu-recommend';
+
+const qs = (id)=>document.getElementById(id);
+const today = ()=>new Date().toISOString().slice(0,10);
+
+function showPage(id){
+  if(!currentUser && id !== 'page-login') id = 'page-login';
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  qs(id).classList.add('active');
+  currentPage = id;
+}
+window.showPage = showPage;
+
+function renderLoginView(mode='auth'){
+  const isProfile = mode === 'profile' && !!currentUser;
+  qs('loginTitle').textContent = isProfile ? '👤 修改暱稱' : '👤 註冊 / 登入';
+  qs('nicknameWrap').style.display = isProfile ? 'block' : 'none';
+  qs('authFieldsWrap').style.display = isProfile ? 'none' : 'block';
+  qs('profileActionRow').style.display = isProfile ? 'grid' : 'none';
+  qs('logoutBtn').style.display = isProfile ? 'block' : 'none';
+  qs('backBtn').style.display = isProfile ? 'block' : 'none';
+  if(isProfile){
+    qs('nicknameInput').value = currentProfile?.nickname || '';
+    qs('loginStatus').textContent = '目前已登入，可直接修改暱稱';
+  } else {
+    qs('loginStatus').textContent = currentUser ? '目前已登入' : '尚未登入';
+  }
+}
+
+function escapeHtml(v=''){ return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+function debug(msg){ qs('loginStatus').textContent = msg; }
+function genCode(){ return Math.random().toString(36).slice(2,8).toUpperCase(); }
+
+function normalizeGroupSlots(profile){
+  const slots = Array.isArray(profile?.groupSlots) ? profile.groupSlots.slice(0,2) : [];
+  while(slots.length < 2) slots.push({ code:'', name:'' });
+  if((profile?.groupCode || '') && !slots[0]?.code){
+    slots[0] = { code: profile.groupCode || '', name: profile.groupName || '' };
+  }
+  return slots.map(s => ({ code: s?.code || '', name: s?.name || '' }));
+}
+function getActiveSlot(){
+  const slots = normalizeGroupSlots(currentProfile || {});
+  return slots[activeGroupIndex] || { code:'', name:'' };
+}
+async function persistGroupSlots(){
+  if(!currentUser) return;
+  const slots = normalizeGroupSlots(currentProfile || {});
+  currentProfile.groupSlots = slots;
+  await update(ref(db, 'users/' + currentUser.uid + '/profile'), {
+    groupSlots: slots,
+    groupCode: slots[0]?.code || '',
+    groupName: slots[0]?.name || '',
+    activeGroupIndex
+  });
+}
+function refreshGroupSlotUI(){
+  const slots = normalizeGroupSlots(currentProfile || {});
+  const firstLabel = slots[0]?.code ? (slots[0].name || slots[0].code) : '群組1';
+  const secondLabel = slots[1]?.code ? (slots[1].name || slots[1].code) : (slots[0]?.code ? '群組2' : '群組2');
+  if(qs('slotBtn0')){
+    qs('slotBtn0').textContent = firstLabel;
+    qs('slotBtn0').className = activeGroupIndex === 0 ? 'btn slot-btn-active' : 'btn5';
+  }
+  if(qs('slotBtn1')){
+    qs('slotBtn1').textContent = secondLabel;
+    qs('slotBtn1').className = activeGroupIndex === 1 ? 'btn slot-btn-active' : 'btn5';
+  }
+}
+async function switchGroupSlot(idx){
+  activeGroupIndex = idx;
+  refreshGroupSlotUI();
+  const slot = getActiveSlot();
+  qs('groupName').value = slot?.name || '';
+  await persistGroupSlots();
+  await loadSocial();
+}
+
+async function saveNickname(){
+  const nick = qs('nicknameInput').value.trim();
+  if(!nick) return qs('loginStatus').textContent = '請先輸入暱稱';
+  localStorage.setItem('temp_nickname', nick);
+  if(currentUser){
+    await update(ref(db, 'users/' + currentUser.uid + '/profile'), { nickname: nick });
+    const slots = normalizeGroupSlots(currentProfile || {});
+    await Promise.all(slots.filter(s=>s?.code).map(s=>update(ref(db, 'groups/' + s.code + '/members/' + currentUser.uid), { nickname: nick })));
+    currentProfile = { ...(currentProfile || {}), nickname: nick };
+    qs('helloTag').textContent = 'Hi ' + nick;
+    qs('helloText').textContent = 'Hi ' + nick;
+    qs('socialWho').textContent = nick + ' / 已登入';
+    qs('loginStatus').textContent = '暱稱已更新';
+    showPage('page-home');
+    await loadSocial();
+    return;
+  }
+  qs('loginStatus').textContent = '暱稱已暫存，登入後會套用';
+}
+
+async function ensureProfile(user){
+  const tempNick = localStorage.getItem('temp_nickname') || '';
+  const nick = tempNick || user.displayName || user.email?.split('@')[0] || '未命名';
+  const pRef = ref(db, 'users/' + user.uid + '/profile');
+  const snap = await get(pRef);
+  if(!snap.exists()){
+    await set(pRef, {
+      uid: user.uid,
+      nickname: nick,
+      loginType: 'firebase',
+      groupCode: '',
+      groupName: '',
+      personalCode: genCode(),
+      createdAt: Date.now()
+    });
+  } else {
+    const old = snap.val();
+    if(tempNick && old.nickname !== tempNick){
+      await update(pRef, { nickname: tempNick });
+    }
+  }
+  const done = await get(pRef);
+  currentProfile = done.val() || {};
+  currentProfile.groupSlots = normalizeGroupSlots(currentProfile || {});
+  if(typeof currentProfile.activeGroupIndex !== 'number') currentProfile.activeGroupIndex = 0;
+  activeGroupIndex = currentProfile.activeGroupIndex || 0;
+  if(!currentProfile.personalCode){
+    currentProfile.personalCode = genCode();
+    await update(pRef, { personalCode: currentProfile.personalCode });
+  }
+  qs('nicknameInput').value = currentProfile.nickname || '';
+  qs('helloTag').textContent = 'Hi ' + (currentProfile.nickname || '使用者');
+  qs('helloText').textContent = 'Hi ' + (currentProfile.nickname || '使用者');
+  qs('socialWho').textContent = (currentProfile.nickname || '使用者') + ' / 已登入';
+  if(qs('myPersonalCode')) qs('myPersonalCode').textContent = currentProfile.personalCode || '未設定';
+  refreshGroupSlotUI();
+  qs('logoutBtn').style.display = 'block';
+}
+
+async function signupNow(){
+  const email = qs('emailInput').value.trim();
+  const password = qs('passwordInput').value;
+  if(!email || !password) return qs('loginStatus').textContent = '請輸入 Email 和密碼';
+  localStorage.removeItem('temp_nickname');
+  try{
+    try{ groupLastSeenTime = Number(localStorage.getItem('lw_group_last_seen') || 0); privateLastSeenMap = JSON.parse(localStorage.getItem('lw_private_last_seen') || '{}') || {}; }catch(e){ groupLastSeenTime = 0; privateLastSeenMap = {}; }
+
+await setPersistence(auth, browserLocalPersistence);
+    await createUserWithEmailAndPassword(auth, email, password);
+  }catch(e){
+    qs('loginStatus').textContent = '註冊失敗：' + (e.code || e.message);
+  }
+}
+async function loginNow(){
+  if(currentUser){
+    renderLoginView('profile');
+    showPage('page-login');
+    return;
+  }
+  const email = qs('emailInput').value.trim();
+  const password = qs('passwordInput').value;
+  if(!email || !password) return qs('loginStatus').textContent = '請輸入 Email 和密碼';
+  try{
+    try{ groupLastSeenTime = Number(localStorage.getItem('lw_group_last_seen') || 0); privateLastSeenMap = JSON.parse(localStorage.getItem('lw_private_last_seen') || '{}') || {}; }catch(e){ groupLastSeenTime = 0; privateLastSeenMap = {}; }
+
+await setPersistence(auth, browserLocalPersistence);
+    await signInWithEmailAndPassword(auth, email, password);
+  }catch(e){
+    qs('loginStatus').textContent = '登入失敗：' + (e.code || e.message);
+  }
+}
+async function resetPasswordNow(){
+  const email = qs('emailInput').value.trim();
+  if(!email) return qs('loginStatus').textContent = '請先輸入 Email';
+  try{
+    await sendPasswordResetEmail(auth, email);
+    qs('loginStatus').textContent = '重設信已寄出：' + email;
+  }catch(e){
+    qs('loginStatus').textContent = '寄送失敗：' + (e.code || e.message);
+  }
+}
+async function logoutNow(){
+  await signOut(auth);
+  currentUser = null;
+  currentProfile = null;
+  unbindSocialRealtime();
+  activeGroupIndex = 0;
+  renderLoginView('auth');
+  qs('helloTag').textContent = 'Hi 訪客';
+  qs('helloText').textContent = 'Hi 訪客';
+  qs('socialWho').textContent = '未登入';
+  qs('loginStatus').textContent = '尚未登入';
+  showPage('page-login');
+}
+
+
+
+
+async function estimateCalories(kind='meal'){
+  const nameEl = kind === 'meal' ? qs('mealNameInput') : qs('drinkName');
+  const kcalEl = kind === 'meal' ? qs('mealKcalInput') : qs('drinkKcal');
+  const name = (nameEl?.value || '').trim();
+  if(!name) return alert('請先輸入名稱');
+  const oldPlaceholder = nameEl.placeholder;
+  try{
+    kcalEl.value = '';
+    nameEl.placeholder = '估算中...';
+    const res = await fetch(TEXT_CALORIE_ENDPOINT, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ kind, name })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data?.error || '估算失敗');
+    kcalEl.value = Number(data?.kcal || 0);
+  }catch(e){
+    alert('估算失敗：' + (e.message || '請稍後再試'));
+  }finally{
+    nameEl.placeholder = oldPlaceholder;
+  }
+}
+
+function calcMealTotal(){ return mealEntries.reduce((s,x)=>s+(Number(x.kcal)||0),0); }
+function calcDrinkTotal(){ return drinkEntries.reduce((s,x)=>s+(Number(x.kcal)||0),0); }
+function resetMealEditor(){
+  editingMealIndex = -1;
+  qs('mealNameInput').value='';
+  qs('mealKcalInput').value='';
+  qs('addMealBtn').textContent='新增餐點';
+}
+function resetDrinkEditor(){
+  editingDrinkIndex = -1;
+  qs('drinkName').value='';
+  qs('drinkKcal').value='';
+  qs('addDrinkBtn').textContent='新增飲料';
+}
+function editMeal(i){
+  const x = mealEntries[i];
+  if(!x) return;
+  editingMealIndex = i;
+  qs('mealNameInput').value = x.name || '';
+  qs('mealKcalInput').value = Number(x.kcal)||0;
+  qs('addMealBtn').textContent='儲存餐點';
+}
+function editDrink(i){
+  const x = drinkEntries[i];
+  if(!x) return;
+  editingDrinkIndex = i;
+  qs('drinkName').value = x.name || '';
+  qs('drinkKcal').value = Number(x.kcal)||0;
+  qs('addDrinkBtn').textContent='儲存飲料';
+}
+function renderEntries(){
+  qs('todayMeals').value = mealEntries.length;
+  const mealTotal = calcMealTotal();
+  const drinkTotal = calcDrinkTotal();
+  const total = mealTotal + drinkTotal;
+  qs('mealTotalV').textContent = mealTotal;
+  qs('drinkV').textContent = drinkTotal;
+  if(qs('totalKcalV')) qs('totalKcalV').textContent = total + ' kcal';
+  const dailyKcal = parseInt((qs('kcalV')?.textContent || '0').replace(/[^0-9]/g,''), 10) || 0;
+  if(qs('totalKcalHint')){
+    qs('totalKcalHint').textContent = total > dailyKcal && dailyKcal > 0 ? '已超過每日建議熱量' : '未超過每日建議熱量';
+    qs('totalKcalHint').className = 'small' + (total > dailyKcal && dailyKcal > 0 ? ' danger-text' : '');
+  }
+  if(qs('totalKcalV')){
+    qs('totalKcalV').className = 'v' + (total > dailyKcal && dailyKcal > 0 ? ' danger-text' : '');
+  }
+  qs('mealList').innerHTML = mealEntries.length ? mealEntries.map((x,i)=>`<div class="photo-item"><b>${escapeHtml(x.name||'未命名餐點')}</b>｜${Number(x.kcal)||0} kcal <div class="photo-actions"><button class="btn2" data-edit-meal="${i}">編輯</button><button class="btn4" data-del-meal="${i}">刪除</button></div></div>`).join('') : '<div class="muted">今天還沒有餐點</div>';
+  qs('drinkList').innerHTML = drinkEntries.length ? drinkEntries.map((x,i)=>`<div class="photo-item"><b>${escapeHtml(x.name||'未命名飲料')}</b>｜${Number(x.kcal)||0} kcal <div class="photo-actions"><button class="btn2" data-edit-drink="${i}">編輯</button><button class="btn4" data-del-drink="${i}">刪除</button></div></div>`).join('') : '<div class="muted">今天還沒有飲料</div>';
+  qs('mealList').querySelectorAll('[data-edit-meal]').forEach(btn=>btn.addEventListener('click', ()=>{
+    editMeal(Number(btn.getAttribute('data-edit-meal')));
+  }));
+  qs('mealList').querySelectorAll('[data-del-meal]').forEach(btn=>btn.addEventListener('click', ()=>{
+    const i = Number(btn.getAttribute('data-del-meal'));
+    mealEntries.splice(i,1);
+    if(editingMealIndex === i) resetMealEditor();
+    renderEntries();
+  }));
+  qs('drinkList').querySelectorAll('[data-edit-drink]').forEach(btn=>btn.addEventListener('click', ()=>{
+    editDrink(Number(btn.getAttribute('data-edit-drink')));
+  }));
+  qs('drinkList').querySelectorAll('[data-del-drink]').forEach(btn=>btn.addEventListener('click', ()=>{
+    const i = Number(btn.getAttribute('data-del-drink'));
+    drinkEntries.splice(i,1);
+    if(editingDrinkIndex === i) resetDrinkEditor();
+    renderEntries(); updateBurn();
+  }));
+}
+function addMeal(){
+  const name = qs('mealNameInput').value.trim();
+  const kcal = Number(qs('mealKcalInput').value||0);
+  if(!name) return alert('請輸入餐點名稱');
+  if(editingMealIndex >= 0 && mealEntries[editingMealIndex]){
+    mealEntries[editingMealIndex] = {name,kcal};
+    resetMealEditor();
+  }else{
+    mealEntries.push({name,kcal});
+  }
+  qs('mealNameInput').value=''; qs('mealKcalInput').value='';
+  renderEntries();
+}
+function addDrink(){
+  const name = (qs('drinkName').value||'').trim();
+  const kcal = Number(qs('drinkKcal').value||0);
+  if(!name) return alert('請輸入飲料名稱');
+  if(editingDrinkIndex >= 0 && drinkEntries[editingDrinkIndex]){
+    drinkEntries[editingDrinkIndex] = {name,kcal};
+    resetDrinkEditor();
+  }else{
+    drinkEntries.push({name,kcal});
+  }
+  qs('drinkName').value=''; qs('drinkKcal').value='';
+  renderEntries(); updateBurn();
+}
+
+
+function renderStats(){
+  const h=(+qs('height').value||177)/100;
+  const w=(+qs('currentWeight').value||107);
+  const t=(+qs('targetWeight').value||75);
+  const mealsVal = +qs('meals').value || 2;
+  const activityVal = qs('activity').value;
+  const speedVal = qs('speed').value;
+
+  const bmiNum=(w/(h*h));
+  const bmi=bmiNum.toFixed(1);
+  let bmiText='正常', bmiClass='bmi-normal';
+  if(bmiNum < 18.5){ bmiText='過瘦'; bmiClass='bmi-under'; }
+  else if(bmiNum < 24){ bmiText='正常'; bmiClass='bmi-normal'; }
+  else if(bmiNum < 27){ bmiText='過重'; bmiClass='bmi-over'; }
+  else { bmiText='肥胖'; bmiClass='bmi-obese'; }
+
+  let kcal=Math.round(w*22);
+  if(activityVal==='mid') kcal+=250;
+  if(activityVal==='high') kcal+=420;
+  if(speedVal==='fast') kcal-=300;
+  if(speedVal==='slow') kcal+=120;
+  if(mealsVal===1) kcal-=120;
+  if(mealsVal===3) kcal+=120;
+  const protein=Math.round(w*1.6 + (mealsVal===1 ? 10 : mealsVal===3 ? -5 : 0));
+
+  let monthlyLoss = 2;
+  if(speedVal==='fast') monthlyLoss=3;
+  if(speedVal==='slow') monthlyLoss=1.5;
+  if(activityVal==='high') monthlyLoss+=0.8;
+  if(activityVal==='low') monthlyLoss-=0.4;
+  monthlyLoss=Math.max(1, monthlyLoss);
+  const months=Math.max(1, Math.ceil(Math.max(w-t,0.1)/monthlyLoss));
+
+  let advice = '';
+  if(w > 150){
+    advice = '建議做法：哈哈哈，建議你去看醫生，讓醫生給點意見。';
+  } else if(bmiNum < 18.5){
+    advice = '建議做法：目前偏瘦，先規律吃飯、補足蛋白質與睡眠，避免再刻意節食。';
+  } else if(bmiNum < 24){
+    advice = '建議做法：目前在正常範圍，重點放在維持、穩定活動量與飲食品質。';
+  } else if(bmiNum < 27){
+    advice = '建議做法：目前過重，建議減少含糖飲料與宵夜，增加日常活動量。';
+  } else {
+    advice = '建議做法：目前肥胖，建議先從減糖、固定步行與穩定熱量赤字開始。';
+  }
+
+  qs('bmiV').textContent=bmi;
+  qs('bmiLabel').textContent=bmiText;
+  qs('bmiLabel').className='small ' + bmiClass;
+  qs('kcalV').textContent=kcal+' kcal';
+  qs('proteinV').textContent=protein+'g';
+  qs('monthV').textContent=months+'個月';
+  qs('planAdvice').textContent = advice;
+  if(typeof renderEntries === 'function') renderEntries();
+}
+
+async function updatePlanAdviceAI(){
+  renderStats();
+  const w = +qs('currentWeight').value || 0;
+  if(w > 150){
+    qs('planAdvice').textContent = '建議做法：哈哈哈，建議你去看醫生，讓醫生給點意見。';
+    return;
+  }
+  const payload = {
+    heightCm: +qs('height').value || 0,
+    weightKg: +qs('currentWeight').value || 0,
+    targetWeightKg: +qs('targetWeight').value || 0,
+    bmi: qs('bmiV').textContent || '',
+    bmiLabel: qs('bmiLabel').textContent || '',
+    mealsPerDay: +qs('meals').value || 0,
+    activity: qs('activity').value || '',
+    speed: qs('speed').value || ''
+  };
+  qs('planAdvice').textContent = '建議產生中...';
+  try{
+    const res = await fetch(PLAN_AI_ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data?.error || '產生失敗');
+    qs('planAdvice').textContent = data?.advice || '建議做法：先從穩定飲食與活動量開始。';
+  }catch(e){
+    renderStats();
+  }
+}
+async function randomMenu(){
+  const payload = {
+    weightKg: +qs('currentWeight').value || 0,
+    targetWeightKg: +qs('targetWeight').value || 0,
+    bmi: qs('bmiV').textContent || '',
+    bmiLabel: qs('bmiLabel').textContent || '',
+    activity: qs('activity').value || '',
+    speed: qs('speed').value || '',
+    mealsPerDay: +qs('meals').value || 0
+  };
+  qs('menuBox').innerHTML = '<div class="menu-item">推薦中...</div>';
+  try{
+    const res = await fetch(MENU_AI_ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data?.error || '推薦失敗');
+    const menus = Array.isArray(data?.menus) ? data.menus : [];
+    qs('menuBox').innerHTML = menus.length ? menus.map(m=>`<div class="menu-item"><span class="pill">${escapeHtml(m.name || '推薦')}</span><div style="margin-top:8px">• ${(m.items || []).map(escapeHtml).join('<br>• ')}</div><div class="sub" style="margin-top:8px">約 ${escapeHtml(String(m.kcal || 0))} kcal</div></div>`).join('') : '<div class="menu-item">目前沒有推薦結果</div>';
+  }catch(e){
+    qs('menuBox').innerHTML = '<div class="menu-item">推薦失敗</div>';
+  }
+}
+function updateBurn(){ qs('burnV').textContent = ((+qs('runMin').value||0)*12).toFixed(0)+' kcal'; qs('drinkV').textContent = calcDrinkTotal(); }
+
+function applyDrinkPreset(){}
+
+async function saveToday(){
+  if(!currentUser) return alert('先登入');
+  const rec = {
+    date: qs('logDate').value || today(),
+    weight: +qs('logWeight').value||0,
+    todayMeals: mealEntries.length,
+    run: +qs('runMin').value||0,
+    mealsDetail: mealEntries,
+    mealsKcal: calcMealTotal(),
+    drinksDetail: drinkEntries,
+    drinkName: drinkEntries.map(x=>x.name).join('、'),
+    drink: calcDrinkTotal(),
+    totalKcal: calcMealTotal() + calcDrinkTotal(),
+    checks: [qs('c1').checked,qs('c2').checked,qs('c3').checked,qs('c4').checked]
+  };
+  await set(ref(db, 'users/' + currentUser.uid + '/logs/' + rec.date), rec);
+  qs('saveState').textContent = '已儲存';
+  await renderHistory();
+  await renderDaily();
+  await drawTrend();
+  await syncToGroup(rec);
+}
+
+async function renderHistory(){
+  if(!currentUser) return;
+  const snap = await get(ref(db, 'users/' + currentUser.uid + '/logs'));
+  const arr = snap.exists() ? Object.values(snap.val()).sort((a,b)=>a.date.localeCompare(b.date)) : [];
+  qs('histTable').innerHTML = arr.length ? arr.slice().reverse().map(r=>`<tr><td>${r.date}</td><td>${r.weight}</td><td>${r.mealsKcal||0}</td><td>${r.drink||0}</td><td>${r.totalKcal || ((r.mealsKcal||0)+(r.drink||0))}</td><td>${r.run}分</td><td>${(r.checks||[]).filter(Boolean).length}/4</td></tr>`).join('') : '<tr><td colspan="7">尚無紀錄</td></tr>';
+}
+async function renderDaily(){
+  if(!currentUser) return;
+  const d = qs('viewDate').value || today();
+  const snap = await get(ref(db, 'users/' + currentUser.uid + '/logs/' + d));
+  const r = snap.exists() ? snap.val() : null;
+  qs('dailyBox').textContent = r ? `${r.date}｜體重 ${r.weight}kg｜食物 ${r.mealsKcal||0} kcal｜飲料 ${r.drink||0} kcal｜總卡路里 ${r.totalKcal || ((r.mealsKcal||0)+(r.drink||0))} kcal｜${r.todayMeals||0}餐｜跑步 ${r.run} 分｜打卡 ${(r.checks||[]).filter(Boolean).length}/4` : '這一天沒有紀錄';
+}
+async function drawTrend(){
+  const canvas = qs('trend');
+  const c=canvas.getContext('2d');
+  c.clearRect(0,0,canvas.width,canvas.height);
+  c.strokeStyle='#e5e7eb';
+  for(let i=0;i<4;i++){ let y=30+i*60; c.beginPath(); c.moveTo(20,y); c.lineTo(880,y); c.stroke(); }
+  if(!currentUser){ c.fillStyle='#94a3b8'; c.font='18px sans-serif'; c.fillText('先登入',40,80); return; }
+  const snap = await get(ref(db, 'users/' + currentUser.uid + '/logs'));
+  const arr = snap.exists() ? Object.values(snap.val()).sort((a,b)=>a.date.localeCompare(b.date)).slice(-7) : [];
+  if(!arr.length){ c.fillStyle='#94a3b8'; c.font='18px sans-serif'; c.fillText('尚無趨勢資料',40,80); return; }
+  const vals=arr.map(x=>x.weight||0), max=Math.max(...vals), min=Math.min(...vals);
+  c.beginPath(); c.strokeStyle='#3167e3'; c.lineWidth=3;
+  vals.forEach((v,i)=>{ let x=30+i*((840)/(Math.max(vals.length-1,1))); let y=220-((v-min)/((max-min)||1))*150; if(i===0)c.moveTo(x,y); else c.lineTo(x,y); });
+  c.stroke();
+}
+
+async function savePhoto(){
+  if(!currentUser) return alert('先登入');
+  const f = qs('photoInput').files[0];
+  if(!f) return alert('先選照片');
+  const reader = new FileReader();
+  reader.onload = async ()=>{
+    const rec = {
+      date: qs('photoDate').value || today(),
+      privacy: qs('photoPrivacy').value,
+      data: reader.result,
+      nickname: currentProfile?.nickname || ''
+    };
+    await set(ref(db, 'users/' + currentUser.uid + '/photos/' + rec.date), rec);
+    const slots = normalizeGroupSlots(currentProfile || {});
+    for(const slot of slots){
+      if(!slot?.code) continue;
+      if(rec.privacy === 'public'){
+        await set(ref(db, 'groups/' + slot.code + '/publicPhotos/' + currentUser.uid + '/' + rec.date), rec);
+      }else{
+        await remove(ref(db, 'groups/' + slot.code + '/publicPhotos/' + currentUser.uid + '/' + rec.date));
+      }
+    }
+    await renderPhotos();
+  };
+  reader.readAsDataURL(f);
+}
+async function renderPhotos(){
+  if(!currentUser) return;
+  const snap = await get(ref(db, 'users/' + currentUser.uid + '/photos'));
+  const arr = snap.exists() ? Object.values(snap.val()).sort((a,b)=>b.date.localeCompare(a.date)) : [];
+  qs('photoList').innerHTML = arr.length ? arr.map(p=>`<div class="photo-item"><div><b>${p.date}</b> <span class="pill">${p.privacy==='public'?'公開':'不公開'}</span></div><img src="${p.data}"><div class="photo-actions"><button class="btn4" data-del-photo="${p.date}">刪除照片</button></div></div>`).join('') : '尚無照片';
+  qs('photoList').querySelectorAll('[data-del-photo]').forEach(btn=>{
+    btn.addEventListener('click', ()=>deletePhoto(btn.getAttribute('data-del-photo')));
+  });
+}
+async function deletePhoto(date){
+  if(!currentUser || !date) return;
+  if(!confirm('確定刪除這張照片？')) return;
+  await remove(ref(db, 'users/' + currentUser.uid + '/photos/' + date));
+  const slots = normalizeGroupSlots(currentProfile || {});
+  for(const slot of slots){
+    if(slot?.code) await remove(ref(db, 'groups/' + slot.code + '/publicPhotos/' + currentUser.uid + '/' + date));
+  }
+  refreshGroupSlotUI();
+  const slot = getActiveSlot();
+  qs('groupName').value = slot?.name || '';
+  await renderPhotos();
+  await loadSocial();
+  await loadFriends();
+  setChatMode('group');
+  setUnreadIndicator();
+}
+function copyPhotoPolicy(){
+  const txt = qs('photoPrivacy').value==='public'?'照片目前設為公開':'照片目前設為不公開';
+  navigator.clipboard.writeText(txt).then(()=> qs('photoPolicyText').textContent = txt);
+}
+async function analyzeFoodPhoto(){
+  const f = qs('foodPhotoInput').files[0];
+  if(!f) return qs('foodAiResult').textContent = '請先選一張食物照片';
+  qs('foodAiResult').textContent = '辨識中...';
+  const dataUrl = await new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(f);
+  });
+  try{
+    const res = await fetch(FOOD_AI_ENDPOINT, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ image: dataUrl })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data?.error || '辨識失敗');
+    lastFoodAi = data;
+    const foods = Array.isArray(data.items) ? data.items.map(x=>`${x.name}（約 ${x.kcal} kcal）`).join('、') : '';
+    qs('foodAiResult').innerHTML = `<b>辨識結果：</b>${escapeHtml(data.summary || foods || '已完成')}<br><div style="margin-top:6px"><b>估算總熱量：</b>${escapeHtml(String(data.totalKcal || 0))} kcal</div><div class="small" style="margin-top:6px">這是估算值，實際熱量仍可能因份量不同而有差異。</div>`;
+  }catch(e){
+    lastFoodAi = null;
+    qs('foodAiResult').innerHTML = `辨識失敗，請稍後再試。<br><span class="small">${escapeHtml(e.message || '請稍後再試')}</span>`;
+  }
+}
+function useFoodCalories(){
+  if(!lastFoodAi){
+    qs('foodAiResult').textContent = '還沒有可套用的辨識結果';
+    setTimeout(()=>{ if(qs('foodAiResult').textContent === '還沒有可套用的辨識結果') qs('foodAiResult').textContent = '可上傳食物照片，辨識後一鍵加入今日餐點。'; }, 3000);
+    return;
+  }
+  mealEntries.push({name:(lastFoodAi.summary || '辨識食物').slice(0,60), kcal:Number(lastFoodAi.totalKcal || 0)});
+  renderEntries();
+  qs('foodAiResult').textContent = '已加入今日餐點';
+  setTimeout(()=>{ if(qs('foodAiResult').textContent === '已加入今日餐點') qs('foodAiResult').textContent = '可上傳食物照片，辨識後一鍵加入今日餐點。'; }, 3000);
+  showPage('page-home');
+}
+function saveReminder(){
+  const data = {enabled: !!qs('reminderEnabled')?.checked, time:qs('remindTime').value, text:qs('remindText').value};
+  localStorage.setItem('reminder_v175', JSON.stringify(data));
+  alert(data.enabled ? '已開啟每日提醒' : '已關閉每日提醒');
+}
+function copyReminder(){
+  const status = qs('reminderEnabled')?.checked ? '開啟' : '關閉';
+  navigator.clipboard.writeText(status+'｜'+qs('remindTime').value+' '+qs('remindText').value);
+}
+
+
+function getPrivateChatId(a,b){ return [a,b].sort().join('_'); }
+
+function unbindPrivateChat(){
+  if(privateChatRef){
+    off(privateChatRef);
+    privateChatRef = null;
+  }
+}
+function unbindFriends(){
+  if(friendsRef){
+    off(friendsRef);
+    friendsRef = null;
+  }
+  if(friendRequestsRef){
+    off(friendRequestsRef);
+    friendRequestsRef = null;
+  }
+}
+function setUnreadIndicator(){
+  const total = (unreadGroupCount || 0) + (unreadPrivateCount || 0);
+  if(!qs('chatFab')) return;
+  if(total > 0) qs('chatFab').classList.add('chat-fab-unread');
+  else qs('chatFab').classList.remove('chat-fab-unread');
+}
+function clearUnreadForCurrentChat(){
+  if(currentChatMode === 'group'){
+    groupLastSeenTime = Date.now();
+    localStorage.setItem('lw_group_last_seen', String(groupLastSeenTime));
+    unreadGroupCount = 0;
+  } else if(currentChatMode === 'private' && activeFriendUid){
+    privateLastSeenMap[activeFriendUid] = Date.now();
+    localStorage.setItem('lw_private_last_seen', JSON.stringify(privateLastSeenMap));
+    unreadPrivateCount = 0;
+  }
+  setUnreadIndicator();
+}
+function setChatMode(mode){
+  currentChatMode = mode;
+  if(qs('friendChatPickerWrap')) qs('friendChatPickerWrap').style.display = mode === 'private' ? 'block' : 'none';
+  if(qs('chatTabGroup')) qs('chatTabGroup').className = mode === 'group' ? 'btn' : 'btn5';
+  if(qs('chatTabFriend')) qs('chatTabFriend').className = mode === 'private' ? 'btn' : 'btn5';
+  if(mode === 'group'){
+    activeFriendUid = '';
+    unbindPrivateChat();
+    loadSocial();
+  } else {
+    qs('chatTitle').textContent = activeFriendUid ? '好友聊天' : '好友聊天';
+    qs('chatStatus').textContent = activeFriendUid ? '私人聊天室已連線' : '請先選擇好友';
+    if(!activeFriendUid) qs('cheerList').textContent = '請先選擇好友';
+  }
+}
+function isFriendInAnyMyGroup(friendUid){
+  const slots = normalizeGroupSlots(currentProfile || {});
+  return slots.some(slot => {
+    const box = window.__groupMembersCache?.[slot.code];
+    return !!(slot.code && box && box[friendUid]);
+  });
+}
+function refreshFriendChatSelect(map){
+  if(!qs('friendChatSelect')) return;
+  const arr = map ? Object.values(map) : [];
+  qs('friendChatSelect').innerHTML = '<option value="">選擇好友聊天</option>' + arr.map(f=>`<option value="${f.uid}">${escapeHtml(f.nickname || '未命名')}</option>`).join('');
+  if(activeFriendUid) qs('friendChatSelect').value = activeFriendUid;
+}
+async function removeFriend(friendUid){
+  if(!currentUser || !friendUid) return;
+  await remove(ref(db, 'friends/' + currentUser.uid + '/' + friendUid));
+  await remove(ref(db, 'friends/' + friendUid + '/' + currentUser.uid));
+  await remove(ref(db, 'friendRequests/' + currentUser.uid + '/' + friendUid));
+  await remove(ref(db, 'friendRequests/' + friendUid + '/' + currentUser.uid));
+  await remove(ref(db, 'privateChats/' + getPrivateChatId(currentUser.uid, friendUid)));
+  delete privateLastSeenMap[friendUid];
+  localStorage.setItem('lw_private_last_seen', JSON.stringify(privateLastSeenMap));
+  if(activeFriendUid === friendUid){
+    activeFriendUid = '';
+    unbindPrivateChat();
+    if(qs('friendChatSelect')) qs('friendChatSelect').value = '';
+    qs('cheerList').textContent = '請先選擇好友';
+    qs('chatStatus').textContent = '請先選擇好友';
+  }
+  unreadPrivateCount = 0;
+  setUnreadIndicator();
+}
+async function acceptFriendRequest(fromUid){
+  if(!currentUser || !fromUid) return;
+  const reqSnap = await get(ref(db, 'friendRequests/' + currentUser.uid + '/' + fromUid));
+  if(!reqSnap.exists()) return alert('找不到申請');
+  const req = reqSnap.val() || {};
+  await set(ref(db, 'friends/' + currentUser.uid + '/' + fromUid), {
+    uid: fromUid,
+    nickname: req.nickname || '未命名',
+    personalCode: req.personalCode || '',
+    addedAt: Date.now()
+  });
+  await set(ref(db, 'friends/' + fromUid + '/' + currentUser.uid), {
+    uid: currentUser.uid,
+    nickname: currentProfile?.nickname || '未命名',
+    personalCode: currentProfile?.personalCode || '',
+    addedAt: Date.now()
+  });
+  await remove(ref(db, 'friendRequests/' + currentUser.uid + '/' + fromUid));
+}
+async function rejectFriendRequest(fromUid){
+  if(!currentUser || !fromUid) return;
+  await remove(ref(db, 'friendRequests/' + currentUser.uid + '/' + fromUid));
+}
+function renderFriendRequests(map){
+  const arr = map ? Object.values(map) : [];
+  if(!qs('friendRequestList')) return;
+  qs('friendRequestList').innerHTML = arr.length ? arr.map(r=>`<div class="request-card"><b>${escapeHtml(r.nickname || '未命名')}</b><div class="small" style="margin-top:6px">個人邀請碼：${escapeHtml(r.personalCode || '')}</div><div class="friend-actions"><button class="btn3" data-accept-friend="${r.uid}">同意</button><button class="btn4" data-reject-friend="${r.uid}">拒絕</button></div></div>`).join('') : '目前沒有好友申請';
+  qs('friendRequestList').querySelectorAll('[data-accept-friend]').forEach(btn=>btn.addEventListener('click', ()=>acceptFriendRequest(btn.getAttribute('data-accept-friend'))));
+  qs('friendRequestList').querySelectorAll('[data-reject-friend]').forEach(btn=>btn.addEventListener('click', ()=>rejectFriendRequest(btn.getAttribute('data-reject-friend'))));
+}
+async function addFriend(){
+  if(!currentUser) return alert('先登入');
+  const code = (qs('friendCodeInput').value || '').trim().toUpperCase();
+  if(!code) return alert('先輸入朋友的個人邀請碼');
+  if(code === (currentProfile?.personalCode || '')) return alert('不能加自己');
+  const allSnap = await get(ref(db, 'users'));
+  if(!allSnap.exists()) return alert('找不到使用者');
+  const users = allSnap.val() || {};
+  let foundUid = '';
+  let foundProfile = null;
+  for(const [uid, u] of Object.entries(users)){
+    const p = u?.profile || {};
+    if((p.personalCode || '').toUpperCase() === code){
+      foundUid = uid;
+      foundProfile = p;
+      break;
+    }
+  }
+  if(!foundUid) return alert('找不到這個個人邀請碼');
+  const alreadyFriend = await get(ref(db, 'friends/' + currentUser.uid + '/' + foundUid));
+  if(alreadyFriend.exists()) return alert('你們已經是好友了');
+  await set(ref(db, 'friendRequests/' + foundUid + '/' + currentUser.uid), {
+    uid: currentUser.uid,
+    nickname: currentProfile?.nickname || '未命名',
+    personalCode: currentProfile?.personalCode || '',
+    time: Date.now()
+  });
+  qs('friendCodeInput').value = '';
+  alert('已送出好友申請，等對方同意');
+}
+function renderFriendList(map){
+  const arr = map ? Object.values(map) : [];
+  cachedFriendsMap = map || {};
+  refreshFriendChatSelect(map || {});
+  qs('friendList').innerHTML = arr.length ? arr.map(f=>{
+    const inMyTeam = isFriendInAnyMyGroup(f.uid);
+    return `<div class="friend-card"><b>${escapeHtml(f.nickname || '未命名')}</b><div class="small" style="margin-top:6px">個人邀請碼：${escapeHtml(f.personalCode || '')}</div><div class="friend-actions"><button class="btn2" data-pm-friend="${f.uid}">私聊</button>${inMyTeam ? '' : `<button class="btn5" data-invite-friend="${f.uid}">邀請進隊</button>`}<button class="btn4" data-del-friend="${f.uid}">刪除好友</button></div></div>`;
+  }).join('') : '尚無好友';
+  qs('friendList').querySelectorAll('[data-pm-friend]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ setChatMode('private'); openPrivateChat(btn.getAttribute('data-pm-friend')); });
+  });
+  qs('friendList').querySelectorAll('[data-invite-friend]').forEach(btn=>{
+    btn.addEventListener('click', ()=>inviteFriendToGroup(btn.getAttribute('data-invite-friend')));
+  });
+  qs('friendList').querySelectorAll('[data-del-friend]').forEach(btn=>{
+    btn.addEventListener('click', ()=>removeFriend(btn.getAttribute('data-del-friend')));
+  });
+}
+async function loadFriends(){
+  if(!currentUser){
+    unbindFriends();
+    if(qs('friendList')) qs('friendList').textContent = '尚無好友';
+    if(qs('friendRequestList')) qs('friendRequestList').textContent = '目前沒有好友申請';
+    return;
+  }
+  unbindFriends();
+  friendsRef = ref(db, 'friends/' + currentUser.uid);
+  onValue(friendsRef, (snap)=>{
+    renderFriendList(snap.exists() ? snap.val() : null);
+  });
+  friendRequestsRef = ref(db, 'friendRequests/' + currentUser.uid);
+  onValue(friendRequestsRef, (snap)=>{
+    renderFriendRequests(snap.exists() ? snap.val() : null);
+  });
+}
+async function inviteFriendToGroup(friendUid){
+  const slot = getActiveSlot();
+  if(!currentUser || !slot?.code) return alert('你要先有目前群組');
+  const msg = `請加入我的隊伍
+群組邀請碼：${slot.code}`;
+  try{
+    await push(ref(db, 'privateChats/' + getPrivateChatId(currentUser.uid, friendUid) + '/messages'), {
+      uid: currentUser.uid,
+      nickname: currentProfile?.nickname || '未命名',
+      text: msg,
+      time: Date.now()
+    });
+    alert('已把群組邀請碼私聊給好友');
+  }catch(e){
+    alert('發送失敗');
+  }
+}
+async function openPrivateChat(friendUid){
+  if(!currentUser || !friendUid) return;
+  currentChatMode = 'private';
+  activeFriendUid = friendUid;
+  qs('chatWidget').classList.add('open');
+  qs('chatTitle').textContent = '好友聊天';
+  qs('chatStatus').textContent = '私人聊天室已連線';
+  unbindPrivateChat();
+  const chatId = getPrivateChatId(currentUser.uid, friendUid);
+  privateChatRef = ref(db, 'privateChats/' + chatId + '/messages');
+  onValue(privateChatRef, (snap)=>{
+    const msgs = snap.exists() ? Object.values(snap.val()).sort((a,b)=>a.time-b.time) : [];
+    const lastSeen = Number(privateLastSeenMap[friendUid] || 0);
+    const unseen = msgs.filter(m => (m.time || 0) > lastSeen && m.uid !== currentUser.uid).length;
+    unreadPrivateCount = unseen;
+    setUnreadIndicator();
+    qs('cheerList').innerHTML = msgs.length ? msgs.slice(-80).map(c=>`<div class="chat-msg"><b>${escapeHtml(c.nickname || '未命名')}</b><div style="margin-top:6px">${escapeHtml(c.text || '')}</div><div class="small" style="margin-top:6px">${new Date(c.time || Date.now()).toLocaleString('zh-TW')}</div></div>`).join('') : '尚無訊息';
+    qs('cheerList').scrollTop = qs('cheerList').scrollHeight;
+    if(qs('chatWidget')?.classList.contains('open')) clearUnreadForCurrentChat();
+  });
+}
+
+async function createGroup(){
+  if(!currentUser) return alert('先登入');
+  const slots = normalizeGroupSlots(currentProfile || {});
+  if(slots[activeGroupIndex]?.code) return alert('這個群組槽位已經有群組了');
+  const name = qs('groupName').value.trim() || `我的減脂群 ${activeGroupIndex+1}`;
+  let code = genCode();
+  while((await get(ref(db, 'groups/' + code))).exists()) code = genCode();
+  await set(ref(db, 'groups/' + code), { code, name, ownerUid: currentUser.uid, createdAt: Date.now() });
+  slots[activeGroupIndex] = { code, name };
+  currentProfile.groupSlots = slots;
+  await persistGroupSlots();
+  await set(ref(db, 'groups/' + code + '/members/' + currentUser.uid), { uid: currentUser.uid, nickname: currentProfile.nickname || '未命名', role: 'leader' });
+  qs('groupName').value = name;
+  refreshGroupSlotUI();
+  await loadSocial();
+}
+async function joinGroup(){
+  if(!currentUser) return alert('先登入');
+  const code = (qs('joinCode').value||'').trim().toUpperCase();
+  if(!code) return alert('先輸入邀請碼');
+  const g = await get(ref(db, 'groups/' + code));
+  if(!g.exists()) return alert('找不到群組');
+  const slots = normalizeGroupSlots(currentProfile || {});
+  const already = slots.findIndex(s => s.code === code);
+  if(already >= 0){
+    activeGroupIndex = already;
+    refreshGroupSlotUI();
+    await persistGroupSlots();
+    return loadSocial();
+  }
+  if(slots[activeGroupIndex]?.code) return alert('目前槽位已經有群組了，先切到另一個空槽位');
+  slots[activeGroupIndex] = { code, name: g.val().name || '' };
+  currentProfile.groupSlots = slots;
+  await persistGroupSlots();
+  await set(ref(db, 'groups/' + code + '/members/' + currentUser.uid), { uid: currentUser.uid, nickname: currentProfile.nickname || '未命名', role: 'member' });
+  refreshGroupSlotUI();
+  await loadSocial();
+}
+async function leaveGroup(){
+  const slot = getActiveSlot();
+  if(!currentUser || !slot?.code) return alert('目前這個槽位沒有加入群組');
+  const ok = confirm(`確定要退出目前群組嗎？\n退出後，這個群組牆上的公開照片會移除，但你的個人照片會保留。`);
+  if(!ok) return;
+  const code = slot.code;
+  await remove(ref(db, 'groups/' + code + '/members/' + currentUser.uid));
+  await remove(ref(db, 'groups/' + code + '/publicPhotos/' + currentUser.uid));
+  const slots = normalizeGroupSlots(currentProfile || {});
+  slots[activeGroupIndex] = { code:'', name:'' };
+  currentProfile.groupSlots = slots;
+  await persistGroupSlots();
+  qs('groupName').value = '';
+  qs('joinCode').value = '';
+  refreshGroupSlotUI();
+  unbindSocialRealtime();
+  await renderPhotos();
+  await loadSocial();
+  alert('已退出目前群組');
+}
+async function resyncPhotosToGroup(){
+  const slot = getActiveSlot();
+  if(!currentUser || !slot?.code) return alert('請先加入目前群組');
+  const snap = await get(ref(db, 'users/' + currentUser.uid + '/photos'));
+  const photos = snap.exists() ? (snap.val() || {}) : {};
+  const privatePhotos = Object.entries(photos).filter(([_, p]) => p && (p.privacy === 'private' || !p.privacy));
+  if(!privatePhotos.length) return alert('目前沒有可同步的私人照片');
+  for(const [dateKey, photo] of privatePhotos){
+    const nextPhoto = { ...photo, privacy: 'public', nickname: currentProfile?.nickname || '' };
+    await update(ref(db, 'users/' + currentUser.uid + '/photos/' + dateKey), { privacy: 'public', nickname: nextPhoto.nickname });
+    await set(ref(db, 'groups/' + slot.code + '/publicPhotos/' + currentUser.uid + '/' + dateKey), nextPhoto);
+  }
+  refreshGroupSlotUI();
+  qs('groupName').value = getActiveSlot()?.name || '';
+  await renderPhotos();
+  await loadSocial();
+  alert('已把私人照片重新同步到群組牆');
+}
+
+async function syncToGroup(rec){
+  const slots = normalizeGroupSlots(currentProfile || {});
+  for(const slot of slots){
+    if(!slot?.code) continue;
+    const memberSnap = await get(ref(db, 'groups/' + slot.code + '/members/' + currentUser.uid));
+    const old = memberSnap.exists() ? memberSnap.val() : {};
+    await update(ref(db, 'groups/' + slot.code + '/members/' + currentUser.uid), {
+      uid: currentUser.uid,
+      nickname: currentProfile.nickname || '未命名',
+      role: old.role || 'member',
+      lastLog: { weight: rec.weight, run: rec.run, drink: rec.drink, date: rec.date }
+    });
+  }
+}
+async function sendCheer(){
+  const txt = qs('cheerMsg').value.trim();
+  if(!txt) return;
+  if(currentChatMode === 'private' && activeFriendUid){
+    await push(ref(db, 'privateChats/' + getPrivateChatId(currentUser.uid, activeFriendUid) + '/messages'), {
+      uid: currentUser.uid,
+      nickname: currentProfile?.nickname || '未命名',
+      text: txt,
+      time: Date.now()
+    });
+    qs('cheerMsg').value = '';
+    return;
+  }
+  const slot = getActiveSlot();
+  if(!slot?.code) return alert('先建立或加入目前群組');
+  await push(ref(db, 'groups/' + slot.code + '/cheers'), {
+    uid: currentUser.uid,
+    nickname: currentProfile.nickname || '未命名',
+    text: txt,
+    time: Date.now()
+  });
+  qs('cheerMsg').value = '';
+}
+function unbindSocialRealtime(){
+  if(socialGroupRef){
+    off(socialGroupRef);
+    socialGroupRef = null;
+  }
+}
+function renderSocialFromGroup(g){
+  const slot = getActiveSlot();
+  if(!currentUser || !slot?.code || !g){
+    qs('myGroupCode').textContent = '尚未加入群組';
+    qs('myGroupName').textContent = '尚未加入群組';
+    qs('myRoleText').textContent = '尚未加入群組';
+    qs('leaderboardBox').textContent = '尚未加入群組';
+    qs('cheerList').textContent = '尚無訊息';
+    qs('chatTitle').textContent = '群組聊天室';
+    qs('chatStatus').textContent = '尚未加入群組';
+    qs('publicPhotoWall').textContent = '尚無公開照片';
+    return;
+  }
+  qs('myGroupCode').textContent = slot.code;
+  qs('myGroupName').textContent = g.name || slot.name || '未命名群組';
+  qs('groupName').value = g.name || slot.name || '';
+  const membersMap = g.members || {};
+  window.__groupMembersCache = window.__groupMembersCache || {};
+  window.__groupMembersCache[slot.code] = membersMap;
+  const myMember = membersMap[currentUser.uid] || {};
+  qs('myRoleText').textContent = myMember.role === 'leader' ? '隊長' : '隊員';
+  const members = Object.values(membersMap);
+  const ranked = members.map(m=>({
+    uid: m.uid || '',
+    name: m.nickname || '未命名',
+    role: m.role === 'leader' ? '隊長' : '隊員',
+    run: m.lastLog?.run || 0,
+    weight: m.lastLog?.weight ?? '-',
+    drink: m.lastLog?.drink || 0
+  })).sort((a,b)=>b.run-a.run);
+  qs('leaderboardBox').innerHTML = ranked.length ? ranked.map((m,i)=>{
+    const canAskFriend = m.uid && m.uid !== currentUser.uid && !cachedFriendsMap[m.uid];
+    return `<div class="leader"><b>#${i+1} ${escapeHtml(m.name)}</b> <span class="pill">${m.role}</span><br>跑步 ${m.run} 分｜體重 ${m.weight} kg｜飲料 ${m.drink} kcal${canAskFriend ? `<div class="friend-actions"><button class="btn5" data-request-friend="${m.uid}">邀請好友</button></div>` : ''}</div>`;
+  }).join('') : '尚無成員';
+  qs('leaderboardBox').querySelectorAll('[data-request-friend]').forEach(btn=>{
+    btn.addEventListener('click', async()=>{
+      const uid = btn.getAttribute('data-request-friend');
+      if(!uid) return;
+      await set(ref(db, 'friendRequests/' + uid + '/' + currentUser.uid), {
+        uid: currentUser.uid,
+        nickname: currentProfile?.nickname || '未命名',
+        personalCode: currentProfile?.personalCode || '',
+        time: Date.now()
+      });
+      alert('已送出好友申請，等對方同意');
+    });
+  });
+  const cheers = g.cheers ? Object.values(g.cheers).sort((a,b)=>a.time-b.time) : [];
+  const unseen = cheers.filter(c => (c.time || 0) > groupLastSeenTime && c.uid !== currentUser.uid).length;
+  unreadGroupCount = unseen;
+  setUnreadIndicator();
+  currentChatMode = 'group';
+  activeFriendUid = '';
+  qs('chatTitle').textContent = '群組聊天室';
+  qs('cheerList').innerHTML = cheers.length ? cheers.slice(-50).map(c=>`<div class="chat-msg"><b>${escapeHtml(c.nickname || '未命名')}</b><div style="margin-top:6px">${escapeHtml(c.text || '')}</div><div class="small" style="margin-top:6px">${new Date(c.time || Date.now()).toLocaleString('zh-TW')}</div></div>`).join('') : '尚無訊息';
+  qs('chatStatus').textContent = `即時聊天室已連線｜群組：${g.name || slot.name || '未命名群組'}`;
+  const box = qs('cheerList'); box.scrollTop = box.scrollHeight;
+  if(qs('chatWidget')?.classList.contains('open') && currentChatMode === 'group') clearUnreadForCurrentChat();
+  const publicPhotosMap = g.publicPhotos || {};
+  const memberEntries = Object.entries(membersMap);
+  qs('publicPhotoWall').innerHTML = memberEntries.length ? `<div class="wall-grid">` + memberEntries.map(([uid, member])=>{
+    const userPhotos = publicPhotosMap[uid] ? Object.values(publicPhotosMap[uid]).sort((a,b)=>String(b.date).localeCompare(String(a.date))) : [];
+    const cover = userPhotos[0]?.data ? `<img class="wall-cover" src="${userPhotos[0].data}" alt="">` : `<div class="photo-empty wall-cover">尚未上傳公開照片</div>`;
+    const canAskFriend = uid !== currentUser.uid && !cachedFriendsMap[uid];
+    return `<div class="photo-wall-person"><div class="photo-wall-header"><div><b>${escapeHtml(member.nickname || '未命名')}</b> <span class="pill">${member.role === 'leader' ? '隊長' : '隊員'}</span></div><div class="small">${userPhotos.length} 張</div></div>${cover}<div class="small" style="margin-top:8px">${userPhotos[0]?.date ? `最新：${escapeHtml(userPhotos[0].date)}` : '目前沒有公開照片'}</div>${canAskFriend ? `<div class="friend-actions"><button class="btn5" data-request-friend-wall="${uid}">邀請好友</button></div>` : ''}<div class="photo-slider" style="margin-top:8px">${userPhotos.slice(0,6).map(p=>`<div class="photo-slide"><img src="${p.data}" alt=""><div class="small" style="margin-top:6px">${escapeHtml(p.date||'')}</div></div>`).join('') || ''}</div></div>`;
+  }).join('') + `</div>` : '尚無公開照片';
+  qs('publicPhotoWall').querySelectorAll('[data-request-friend-wall]').forEach(btn=>{
+    btn.addEventListener('click', async()=>{
+      const uid = btn.getAttribute('data-request-friend-wall');
+      if(!uid) return;
+      await set(ref(db, 'friendRequests/' + uid + '/' + currentUser.uid), {
+        uid: currentUser.uid,
+        nickname: currentProfile?.nickname || '未命名',
+        personalCode: currentProfile?.personalCode || '',
+        time: Date.now()
+      });
+      alert('已送出好友申請，等對方同意');
+    });
+  });
+}
+async function loadSocial(){
+  const slot = getActiveSlot();
+  if(!currentUser || !slot?.code){
+    unbindSocialRealtime();
+    renderSocialFromGroup(null);
+    return;
+  }
+  unbindSocialRealtime();
+  socialGroupRef = ref(db, 'groups/' + slot.code);
+  onValue(socialGroupRef, async(snap)=>{
+    if(!snap.exists()){
+      renderSocialFromGroup(null);
+      return;
+    }
+    const g = snap.val();
+    const slots = normalizeGroupSlots(currentProfile || {});
+    if((slots[activeGroupIndex]?.name || '') !== (g.name || '')){
+      slots[activeGroupIndex].name = g.name || '';
+      currentProfile.groupSlots = slots;
+      await persistGroupSlots();
+    }
+    renderSocialFromGroup(g);
+  });
+}
+async function initAfterLogin(){
+  renderStats();
+  randomMenu();
+  renderEntries();
+  updateBurn();
+  try{
+    const r = JSON.parse(localStorage.getItem('reminder_v175')||'null');
+    if(r){
+      if(qs('reminderEnabled')) qs('reminderEnabled').checked = !!r.enabled;
+      if(qs('remindTime')) qs('remindTime').value = r.time || '21:00';
+      if(qs('remindText')) qs('remindText').value = r.text || '記得量體重、控制飲料、拍照紀錄';
+    }
+  }catch(e){}
+
+  qs('logDate').value = today();
+  qs('viewDate').value = today();
+  qs('photoDate').value = today();
+  await renderHistory();
+  await renderDaily();
+  await drawTrend();
+  refreshGroupSlotUI();
+  const slot = getActiveSlot();
+  qs('groupName').value = slot?.name || '';
+  await renderPhotos();
+  await loadSocial();
+  await loadFriends();
+  setChatMode('group');
+  setUnreadIndicator();
+}
+if(qs('addMealBtn')) qs('addMealBtn').addEventListener('click', addMeal);
+if(qs('addDrinkBtn')) qs('addDrinkBtn').addEventListener('click', addDrink);
+if(qs('estimateMealBtn')) qs('estimateMealBtn').addEventListener('click', ()=>estimateCalories('meal'));
+if(qs('estimateDrinkBtn')) qs('estimateDrinkBtn').addEventListener('click', ()=>estimateCalories('drink'));
+if(qs('saveNickBtn')) qs('saveNickBtn').addEventListener('click', saveNickname);
+qs('signupBtn').addEventListener('click', signupNow);
+qs('loginBtn').addEventListener('click', loginNow);
+qs('resetBtn').addEventListener('click', resetPasswordNow);
+qs('logoutBtn').addEventListener('click', logoutNow);
+qs('backBtn').addEventListener('click', ()=>{ if(currentUser){ showPage('page-home'); } else { renderLoginView('auth'); showPage('page-login'); } });
+qs('updatePlanBtn').addEventListener('click', updatePlanAdviceAI);
+qs('redrawMenuBtn').addEventListener('click', randomMenu);
+qs('runMin').addEventListener('input', updateBurn);
+qs('drinkKcal').addEventListener('input', updateBurn);
+qs('saveTodayBtn').addEventListener('click', saveToday);
+qs('savePhotoBtn').addEventListener('click', savePhoto);
+qs('copyPolicyBtn').addEventListener('click', copyPhotoPolicy);
+qs('saveReminderBtn').addEventListener('click', saveReminder);
+qs('copyReminderBtn').addEventListener('click', copyReminder);
+qs('createGroupBtn').addEventListener('click', createGroup);
+if(qs('slotBtn0')) qs('slotBtn0').addEventListener('click', ()=>switchGroupSlot(0));
+if(qs('slotBtn1')) qs('slotBtn1').addEventListener('click', ()=>switchGroupSlot(1));
+qs('leaveGroupBtn').addEventListener('click', leaveGroup);
+qs('joinGroupBtn').addEventListener('click', joinGroup);
+if(qs('resyncPhotosBtn')) qs('resyncPhotosBtn').addEventListener('click', resyncPhotosToGroup);
+if(qs('addFriendBtn')) qs('addFriendBtn').addEventListener('click', addFriend);
+if(qs('copyPersonalCodeBtn')) qs('copyPersonalCodeBtn').addEventListener('click', ()=>navigator.clipboard.writeText(qs('myPersonalCode').textContent || ''));
+qs('sendCheerBtn').addEventListener('click', sendCheer);
+qs('analyzeFoodBtn').addEventListener('click', analyzeFoodPhoto);
+qs('useFoodCaloriesBtn').addEventListener('click', useFoodCalories);
+qs('chatFab').addEventListener('click', ()=>{
+  qs('chatWidget').classList.toggle('open');
+  if(qs('chatWidget').classList.contains('open')) clearUnreadForCurrentChat();
+});
+qs('closeChatBtn').addEventListener('click', ()=>qs('chatWidget').classList.remove('open'));
+if(qs('chatTabGroup')) qs('chatTabGroup').addEventListener('click', ()=>setChatMode('group'));
+if(qs('chatTabFriend')) qs('chatTabFriend').addEventListener('click', ()=>setChatMode('private'));
+if(qs('friendChatSelect')) qs('friendChatSelect').addEventListener('change', ()=>{ const uid = qs('friendChatSelect').value; if(uid){ setChatMode('private'); openPrivateChat(uid);} });
+qs('cheerMsg').addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendCheer(); } });
+qs('viewDate').addEventListener('change', renderDaily);
+qs('editProfileBtn').addEventListener('click', ()=>{ renderLoginView('profile'); showPage('page-login'); });
+qs('navHome').addEventListener('click', ()=>showPage('page-home'));
+qs('navPhoto').addEventListener('click', ()=>showPage('page-photo'));
+qs('navSocial').addEventListener('click', ()=>{showPage('page-social'); loadSocial();});
+qs('photoPrivacy').addEventListener('change', ()=>{ qs('photoPolicyText').textContent = qs('photoPrivacy').value==='public'?'目前預設：公開':'目前預設：不公開'; });
+
+try{ groupLastSeenTime = Number(localStorage.getItem('lw_group_last_seen') || 0); privateLastSeenMap = JSON.parse(localStorage.getItem('lw_private_last_seen') || '{}') || {}; }catch(e){ groupLastSeenTime = 0; privateLastSeenMap = {}; }
+
+await setPersistence(auth, browserLocalPersistence);
+
+onAuthStateChanged(auth, async(user)=>{
+  currentUser = user;
+  if(user){
+    await ensureProfile(user);
+    renderLoginView('auth');
+    qs('loginStatus').textContent = '已登入：' + (currentProfile?.nickname || user.email || user.uid);
+    showPage('page-home');
+    await initAfterLogin();
+  } else {
+    renderLoginView('auth');
+    qs('loginStatus').textContent = '尚未登入';
+    qs('helloTag').textContent = 'Hi 訪客';
+    qs('helloText').textContent = 'Hi 訪客';
+    qs('socialWho').textContent = '未登入';
+    qs('logDate').value = today();
+    qs('viewDate').value = today();
+    qs('photoDate').value = today();
+    renderStats();
+    randomMenu();
+    renderEntries();
+    updateBurn();
+    showPage('page-login');
+  }
+});
+</script>
+</body>
+</html>
