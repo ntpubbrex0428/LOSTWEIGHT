@@ -3,9 +3,9 @@ export async function handler(event) {
     return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
   try {
-    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-    if (!OPENAI_API_KEY) {
-      return { statusCode: 500, body: JSON.stringify({ error: "尚未設定 OPENAI_API_KEY 環境變數" }) };
+    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+    if (!OPENROUTER_API_KEY) {
+  return { statusCode: 500, body: JSON.stringify({ error: "尚未設定 OPENROUTER_API_KEY 環境變數" }) };
     }
     const body = JSON.parse(event.body || "{}");
     const kind = String(body.kind || "meal");
@@ -22,14 +22,14 @@ export async function handler(event) {
       "請給常見成人一份的估算熱量。"
     ].join("\n");
 
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+    const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
+        model: "openrouter/auto",
         temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [{ role: "system", content: prompt }]
