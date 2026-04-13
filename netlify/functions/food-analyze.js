@@ -4,13 +4,17 @@ export async function handler(event) {
   }
 
   try {
-    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-    if (!OPENAI_API_KEY) {
-      return { statusCode: 500, body: JSON.stringify({ error: "尚未設定 OPENAI_API_KEY 環境變數" }) };
+    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+    if (!OPENROUTER_API_KEY) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "尚未設定 OPENROUTER_API_KEY 環境變數" })
+      };
     }
 
     const body = JSON.parse(event.body || "{}");
     const image = body.image;
+
     if (!image || typeof image !== "string" || !image.startsWith("data:image/")) {
       return { statusCode: 400, body: JSON.stringify({ error: "請提供圖片 data URL" }) };
     }
@@ -23,14 +27,14 @@ export async function handler(event) {
       "如果不確定，也要盡量估算並在 summary 說明是估算值。"
     ].join("\n");
 
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+    const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
+        model: "openrouter/auto",
         temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [
@@ -47,28 +51,32 @@ export async function handler(event) {
     });
 
     const data = await resp.json();
+
     if (!resp.ok) {
-      return { statusCode: resp.status, body: JSON.stringify({ error: data?.error?.message || "OpenAI API 呼叫失敗" }) };
+      return {
+        statusCode: resp.status,
+        body: JSON.stringify({ error: data?.error?.message || "OpenRouter API 呼叫失敗" })
+      };
     }
 
-    const content = data?.choices?.[0]?.message?.content || "{}";
-    let parsed;
+    let parsed = { summary: "", totalKcal: 0, items: [] };
     try {
-      parsed = JSON.parse(content);
-    } catch {
-      parsed = { summary: String(content).slice(0, 300), totalKcal: 0, items: [] };
-    }
+      parsed = JSON.parse(data?.choices?.[0]?.message?.content || "{}");
+    } catch (_) {}
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        summary: parsed.summary || "已完成估算",
-        totalKcal: Number(parsed.totalKcal || 0),
-        items: Array.isArray(parsed.items) ? parsed.items : []
+        summary: String(parsed?.summary || ""),
+        totalKcal: Number(parsed?.totalKcal || 0),
+        items: Array.isArray(parsed?.items) ? parsed.items : []
       })
     };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err?.message || "伺服器錯誤" }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: err?.message || "伺服器錯誤" })
+    };
   }
 }

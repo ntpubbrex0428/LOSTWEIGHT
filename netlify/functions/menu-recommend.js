@@ -2,11 +2,16 @@ export async function handler(event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
+
   try {
-    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-    if (!OPENAI_API_KEY) {
-      return { statusCode: 500, body: JSON.stringify({ error: "尚未設定 OPENAI_API_KEY 環境變數" }) };
+    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+    if (!OPENROUTER_API_KEY) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "尚未設定 OPENROUTER_API_KEY 環境變數" })
+      };
     }
+
     const body = JSON.parse(event.body || "{}");
     const {
       weightKg = 0,
@@ -37,15 +42,15 @@ export async function handler(event) {
       `每天幾餐：${mealsPerDay}`
     ].join("\n");
 
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
+    const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${OPENAI_API_KEY}`
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
-        temperature: 0.5,
+        model: "openrouter/auto",
+        temperature: 0.2,
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: prompt },
@@ -55,27 +60,30 @@ export async function handler(event) {
     });
 
     const data = await resp.json();
+
     if (!resp.ok) {
-      return { statusCode: resp.status, body: JSON.stringify({ error: data?.error?.message || "OpenAI API 呼叫失敗" }) };
+      return {
+        statusCode: resp.status,
+        body: JSON.stringify({ error: data?.error?.message || "OpenRouter API 呼叫失敗" })
+      };
     }
 
     let parsed = { menus: [] };
     try {
       parsed = JSON.parse(data?.choices?.[0]?.message?.content || "{}");
-    } catch {}
+    } catch (_) {}
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        menus: Array.isArray(parsed.menus) ? parsed.menus.map(m => ({
-          name: String(m.name || "AI推薦"),
-          items: Array.isArray(m.items) ? m.items.map(x => String(x)) : [],
-          kcal: Number(m.kcal || 0)
-        })) : []
+        menus: Array.isArray(parsed?.menus) ? parsed.menus : []
       })
     };
   } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err?.message || "伺服器錯誤" }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: err?.message || "伺服器錯誤" })
+    };
   }
 }
